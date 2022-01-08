@@ -1,4 +1,5 @@
 import pywhatkit
+import wikipedia
 import time
 import pyautogui
 import keyboard as k
@@ -9,31 +10,32 @@ def ytplay(link):
         pywhatkit.playonyt(link)
         print("Playing Now...")
     except:
-        print("Network Error Occured... Please Make sure you are conncected to the internet..")
-def sendmsg(n,m,hr,mi):
+        print("Network Error Occured... Please Make sure you are connected to the internet..")
+def sendmsgc(n,m,hr,mi):
     try:
         pywhatkit.sendwhatmsg(n,m,hr,mi,24)
         pyautogui.click(1535, 985)
         time.sleep(2)
-        k.press_and_release('enter')
+        pyautogui.press('enter')
         print("Message has been forwarded to",n)
     except:
-        print("Network Error Occured... Please Make sure you are conncected to the internet..")
+        print("Network Error Occured... Please Make sure you are connected to the internet..")
 
 def googlesearch(search):
     try:
         pywhatkit.search(search)
         print("Searching on google...")
     except:
-        print("Network Error Occured... Please Make sure you are conncected to the internet..")
+        print("Network Error Occured... Please Make sure you are connected to the internet..")
 
 def searchinfo(info1,lineno):
     try:
-        pywhatkit.info(info1, lines = lineno)
+        k = wikipedia.summary(info1, sentences = lineno)
         print("Fetching info..")
+        print("There you go..")
+        print(k)
     except:
-        print("Network Error Occured... Please Make sure you are conncected to the internet..")
-
+        print("Network Error Occured... Please Make sure you are connected to the internet..")
 
 def main():
     print("Hello There... Welcome to PywhatKIT!")
@@ -43,14 +45,16 @@ def main():
     print('Please Enter which function you would like to perform(1/2/3/4):')
     func = int(input())
     if func == 1 :
-        print("Enter the reciever mobile number")
+        print("Enter the reciever mobile number(with country code)")
         n1 = input()
         print("Enter the message to be forwarded")
         m1 = input()
         print("Enter time (hr-min), newline wise")
         hr1 = int(input())
         mi1 = int(input())
-        sendmsg(n1,m1,hr1,mi1)
+        sendmsgc(n1,m1,hr1,mi1)      
+                
+
 
     elif func == 2 :
         print("Enter the URL/Title of the video to play on YouTube:")
